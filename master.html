@@ -1,0 +1,44 @@
+<html lang="en">
+<script src="node_modules/absoduler/lib/Absoduler.js"></script>
+<script src="node_modules/absoduler/lib/Serialize.js"></script>
+<script src="https://code.jquery.com/jquery-2.1.4.min.js"></script>
+
+<script>
+var abdl = new Absoduler({server: 'ws://qy.sonificator.com:9801/'});
+var index = 0;
+var mute = 'mute';
+abdl.on('initialized', function () {
+  console.log('initialized!');
+  $('#run').show();
+  $('#status').text('connected');
+});
+abdl.on('cue', function (data) {
+console.log('mute');
+  mute = data.mute;
+});
+abdl.on('blah', function (data) {
+
+  if ( mute === 'mute' ) {
+    $('#status').text('running correctly, but muted my conductor. please wait for cue');
+    return;
+  }
+
+  Player.play(data[0].origin,data[0].index,data[0].interval);
+  setTimeout( function () {
+    Player.play(data[0].origin,data[0].index + 1,data[0].interval);
+  }, 960);
+});
+
+$(document).on('click', '#mute', function () {
+  abdl.socket.send('mute');
+});
+
+$(document).on('click', '#play', function () {
+  abdl.socket.send('mute');
+});
+</script>
+
+<button id="mute">mute</button>
+<button id="play">play</button>
+
+</html>

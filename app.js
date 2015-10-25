@@ -3,6 +3,13 @@ var abdls = new AbsodulerServer({ port: 9801 });
 
 abdls.on('connection', function (ws) {
 //  ws.sendEvent('blah', 1000, {'additional': 'informations'});
+  ws.on('message', function (data) {
+console.log('hoge',data);
+    var mute = data === 'mute' ? 'mute' : 'play';
+    for ( var c in abdls.wss.clients ) {
+      abdls.wss.clients[c].sendEvent('cue', 1000, {mute: mute});
+    }
+  });
 });
 
 var origin = (new Date()).getTime();

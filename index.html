@@ -5,15 +5,37 @@
 <script src="https://code.jquery.com/jquery-2.1.4.min.js"></script>
 <script src="stereo-panner-node.min.js"></script>
 <meta name="viewport" content="width=device-width,initial-scale=1">
+<style>
+  #run {
+  text-align: center;
+    width: 100%;
+    height: 50px;
+    font-size: 40px;
+    text-weight: bold;
+    background-color: #0f0;
+    color: #fff;
+  }
+</style>
 <script>
 var abdl = new Absoduler({server: 'ws://qy.sonificator.com:9801/'});
 var index = 0;
+var mute = 'mute';
 abdl.on('initialized', function () {
   console.log('initialized!');
   $('#run').show();
+  $('#status').text('connected');
+});
+abdl.on('cue', function (data) {
+  mute = data.mute;
 });
 abdl.on('blah', function (data) {
-//console.log(data);
+
+  if ( mute === 'mute' ) {
+    $('#status').text('running correctly, but muted by conductor. please wait for cue');
+    return;
+  }
+
+  $('#status').text('playing');
 console.log('fire', data[0].index, data[0].index % 2);
   Player.play(data[0].origin,data[0].index,data[0].interval);
   setTimeout( function () {
@@ -779,6 +801,7 @@ $(function () {
   });
 });
 </script>
-hello?
-<button id="run" style="display: none;">run</button>
+<h1>Qyarts demo session at #wmmu-jp !</h1>
+<button id="run" style="display: none;">JOIN!</button>
+<div id="status">connecting</div>
 </html>
