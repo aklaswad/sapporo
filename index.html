@@ -31,11 +31,11 @@ abdl.on('cue', function (data) {
 abdl.on('blah', function (data) {
 
   if ( mute === 'mute' ) {
-    $('#status').text('running correctly, but muted by conductor. please wait for cue');
+    $('#status').text('running correctly, but muted by conductor. please wait for cue - ' + (new Date()).toString());
     return;
   }
 
-  $('#status').text('playing');
+  $('#status').text('playing - ' + (new Date()).toString());
 console.log('fire', data[0].index, data[0].index % 2);
   Player.play(data[0].origin,data[0].index,data[0].interval);
   setTimeout( function () {
@@ -798,6 +798,7 @@ console.log('drum');
 $(function () {
   $('#run').click(function () {
     Player.on();
+    $(this).remove();
   });
 });
 </script>
