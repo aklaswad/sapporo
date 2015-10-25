@@ -261,6 +261,7 @@ var Player = {
     var tick = idx * 2 % 4;
     var beat = time.bar * 4 + idx % 2;
     if ( this.beat === beat ) return;
+    $('#status').text( "" + this.bar + " : " + idx % 2 );
     this.beat = beat;
     console.log(this.bar, idx, origin, tick);
 //    $('.tick').css({"background": ""});
