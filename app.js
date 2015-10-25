@@ -1,4 +1,4 @@
-var AbsodulerServer = require('Absoduler').Server;
+var AbsodulerServer = require('absoduler').Server;
 var abdls = new AbsodulerServer({ port: 9801 });
 
 abdls.on('connection', function (ws) {
