@@ -23,10 +23,6 @@ abdl.on('blah', function (data) {
     return;
   }
 
-  Player.play(data[0].origin,data[0].index,data[0].interval);
-  setTimeout( function () {
-    Player.play(data[0].origin,data[0].index + 1,data[0].interval);
-  }, 960);
 });
 
 $(document).on('click', '#mute', function () {
