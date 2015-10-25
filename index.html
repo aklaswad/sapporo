@@ -22,8 +22,9 @@ var index = 0;
 var mute = 'mute';
 abdl.on('initialized', function () {
   console.log('initialized!');
-  $('#status').text('connected');
+  $('#status').text('connected. please wait for the Cue.');
 });
+
 abdl.on('cue', function (data) {
   if ( data.mute === 'mute' ) {
     Player.off();
@@ -32,15 +33,8 @@ abdl.on('cue', function (data) {
     $('#run').show();
   }
 });
+
 abdl.on('blah', function (data) {
-
-  if ( mute === 'mute' ) {
-    $('#status').text('running correctly, but muted by conductor. please wait for cue - ' + (new Date()).toString());
-    return;
-  }
-
-  $('#status').text('playing - ' + (new Date()).toString());
-console.log('fire', data[0].index, data[0].index % 2);
   Player.play(data[0].origin,data[0].index,data[0].interval);
   setTimeout( function () {
     Player.play(data[0].origin,data[0].index + 1,data[0].interval);
