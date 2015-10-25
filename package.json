@@ -1,0 +1,14 @@
+{
+  "name": "sapporo",
+  "version": "1.0.0",
+  "description": "",
+  "main": "app.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "absoduler": "file:../../../../var/folders/7d/4wqfv7xx2qs6fm6hfs16_x4r0000gn/T/npm-685-b2830f0d/1445504112080-0.6882823235355318/ffc0add051a12adc782fdb70011053d522b8f122"
+  }
+}
