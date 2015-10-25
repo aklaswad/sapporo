@@ -22,11 +22,15 @@ var index = 0;
 var mute = 'mute';
 abdl.on('initialized', function () {
   console.log('initialized!');
-  $('#run').show();
   $('#status').text('connected');
 });
 abdl.on('cue', function (data) {
-  mute = data.mute;
+  if ( data.mute === 'mute' ) {
+    Player.off();
+  }
+  else {
+    $('#run').show();
+  }
 });
 abdl.on('blah', function (data) {
 
