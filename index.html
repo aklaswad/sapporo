@@ -22,7 +22,8 @@ var index = 0;
 var mute = 'mute';
 abdl.on('initialized', function () {
   console.log('initialized!');
-  $('#status').text('connected. please wait for the Cue.');
+  $('#status').text('connected.');
+  $('#run').show();
 });
 
 abdl.on('cue', function (data) {
@@ -797,11 +798,20 @@ console.log('drum');
 $(function () {
   $('#run').click(function () {
     Player.on();
-    $(this).remove();
+    $(this).hide();
+    $('#stop').show();
+  });
+
+  $('#stop').click(function () {
+    Player.off();
+    $(this).hide();
+    $('#run').show();
   });
 });
+
 </script>
 <h1>Qyarts demo session at #wmmu-jp !</h1>
 <button id="run" style="display: none;">JOIN!</button>
+<button id="stop" style="display: none;">STOP</button>
 <div id="status">connecting</div>
 </html>
